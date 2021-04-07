@@ -39,14 +39,18 @@ namespace ProjetcMVC
             services.AddDbContext<ProjetcMVCContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("ProjetcMVCContext"), builder =>
                     builder.MigrationsAssembly("ProjetcMVC")));
+
+            //Add a calsse SeedingService como serviço de injeção de dependência da aplicação
+            services.AddScoped<SeedingService>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline. E add a dependência SeedingService para popular o db
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedingService seedingService)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                seedingService.Seed();
             }
             else
             {
