@@ -23,8 +23,8 @@ namespace ProjetcMVC.Services
 
         public void Insert(Seller obj)
         {
-            //teste fa ForeingKey
-            obj.Department = _context.Department.First();
+            ////teste fa ForeingKey
+            //obj.Department = _context.Department.First();
             _context.Add(obj);
             _context.SaveChanges();
         }
