@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ProjetcMVC.Data;
+using ProjetcMVC.Services;
 
 namespace ProjetcMVC
 {
@@ -42,6 +43,7 @@ namespace ProjetcMVC
 
             //Add a calsse SeedingService como serviço de injeção de dependência da aplicação
             services.AddScoped<SeedingService>();
+            services.AddScoped<SellerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline. E add a dependência SeedingService para popular o db
