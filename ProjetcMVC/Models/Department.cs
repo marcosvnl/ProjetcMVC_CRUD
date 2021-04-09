@@ -23,7 +23,7 @@ namespace ProjetcMVC.Models
             Sellers.Add(seller);
         }
 
-        public double TotalSeles(DateTime initial, DateTime final)
+        public double TotalSales(DateTime initial, DateTime final)
         {
             return Sellers.Sum(seller => seller.TotalSales(initial, final));
         }
