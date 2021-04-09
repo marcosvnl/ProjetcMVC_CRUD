@@ -39,9 +39,16 @@ namespace ProjetcMVC.Services
 
         public async Task RemoveAsync(int id)
         {
-            var obj = await _context.Seller.FindAsync(id);
-            _context.Seller.Remove(obj);
-            await _context.SaveChangesAsync();
+            try {
+                var obj = await _context.Seller.FindAsync(id);
+                _context.Seller.Remove(obj);
+                await _context.SaveChangesAsync();
+            }
+            catch(DbUpdateException)
+            {
+                var seller = await _context.Seller.FindAsync(id);
+                throw new IntegrityException("O vendedor(a) " + seller.Name + " não pode ser 'Deletado'. Pois o mesmo contem vendas.");
+            }
         }
 
         public async Task UpdateAsync(Seller obj)
